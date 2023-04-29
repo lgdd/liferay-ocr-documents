@@ -1,0 +1,5 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileInclude group: 'org.apache.httpcomponents', name: 'httpclient-osgi', version: '4.5.14'
+	compileInclude group: 'org.apache.httpcomponents', name: 'httpcore-osgi', version: '4.4.16'
+}

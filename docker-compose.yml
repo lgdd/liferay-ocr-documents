@@ -1,0 +1,15 @@
+version: "3"
+services:
+  liferay:
+    image: liferay/dxp:7.4.13-u73
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./build/docker/deploy:/mnt/liferay/deploy
+      - ./configs/local:/mnt/liferay/files
+  ocr:
+    image: lgdd/tess4j-rest
+    environment:
+      TESSERACT_DATA_LANGS: eng,fra,spa,deu
+    ports:
+      - "8000:8000"
