@@ -4,7 +4,7 @@ Demonstrates how we can send images to an OCR service and add the detected text 
 
 ## How it works
 
-This example is using a custom REST OCR service (https://github.com/lgdd/tess4j-rest) to detect the text in an image.
+This example is using a custom REST OCR service (cf. [GitHub repository](https://github.com/lgdd/tess4j-rest) & [Docker Image](https://hub.docker.com/r/lgdd/tess4j-rest)) to detect the text in an image.
 
 In Liferay DXP, we need a [custom module](modules/ocr-processor/) adding a `ModelContributor` for the `DLFileEntry`. So when a file is uploaded or modified, this custom component will do an HTTP call to the REST OCR service to send it the file. The HTTP response contains the detected text which is then added to the document to be indexed.
 
@@ -32,6 +32,8 @@ STARTED com.github.lgdd.liferay.ocr_x.x.x
 - Go back to the home page (http://localhost:8080)
 - Type a keyword from the image (with the image above, try `fox`)
 - The uploaded image appears in the search results
+
+> **Note**: Depending on where you host the [tess4j-rest](https://github.com/lgdd/tess4j-rest) project
 
 ## Feature Request
 
