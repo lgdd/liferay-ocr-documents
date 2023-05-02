@@ -19,11 +19,14 @@ jobs:
           java-version: 11
       - name: Cache Gradle packages
         id: cache_gradle_packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Build Modules
         id: build_gradle
         run: ./gradlew deploy
