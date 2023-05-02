@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish_release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        id: setup_jdk
+        uses: actions/checkout@v3
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - name: Cache Gradle packages
+        id: cache_gradle_packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Build Modules
+        id: build_gradle
+        run: ./gradlew deploy
+      - name: Create Release
+        if: success()
+        run: gh release create ${{ github.ref }} (ls ./bundles/osgi/modules) --generate-notes
