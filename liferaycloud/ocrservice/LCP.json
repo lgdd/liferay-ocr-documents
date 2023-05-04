@@ -1,0 +1,39 @@
+{
+  "kind": "Deployment",
+  "id": "ocrservice",
+  "image": "lgdd/tess4j-rest:latest",
+  "cpu": 2,
+  "memory": 512,
+  "ports": [
+    {
+      "port": 8000,
+      "external": false
+    }
+  ],
+  "env": {
+    "TESSERACT_DATA_LANGS": "eng,fra,spa,deu"
+  },
+  "readinessProbe": {
+    "httpGet": {
+      "path": "/q/health/ready",
+      "port": 8000
+    },
+    "initialDelaySeconds": 5,
+    "periodSeconds": 2,
+    "timeoutSeconds": 5,
+    "successThreshold": 2
+  },
+  "livenessProbe": {
+    "httpGet": {
+      "path": "/q/health/live",
+      "port": 8000
+    },
+    "initialDelaySeconds": 30,
+    "timeoutSeconds": 1
+  },
+  "environments": {
+    "prd": {
+      "deploy": true
+    }
+  }
+}
