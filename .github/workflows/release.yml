@@ -36,4 +36,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           ./gradlew deploy
-          gh release create ${{ github.ref }} $(ls ./bundles/osgi/modules/*.jar) --generate-notes
+          gh release create ${{ github.ref }} $(ls ./bundles/osgi/modules/*.jar && ls ./bundles/osgi/client-extensions/*.zip) --generate-notes
