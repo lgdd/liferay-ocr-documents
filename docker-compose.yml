@@ -1,7 +1,7 @@
 version: "3"
 services:
   liferay:
-    image: liferay/dxp:7.4.13-u92
+    image: liferay/dxp:7.4.13-u112
     ports:
       - "8080:8080"
     volumes:
